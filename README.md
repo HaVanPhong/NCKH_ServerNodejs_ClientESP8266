@@ -13,8 +13,8 @@
 
 
 # Thư viện sử dụng
-## Nodejs
-<h1>Websocket nguồn: <a href="https://www.npmjs.com/package/ws"></a></h1>
+### Nodejs
+<p>Websocket nguồn: <a href="https://www.npmjs.com/package/ws"></a></p>
 
 
-## Triển khai trên các client như app mobile flutter, android, web yêu cầu sử dụng thư viện tương thích với Websocket
+### Triển khai trên các client như app mobile flutter, android, web yêu cầu sử dụng thư viện tương thích với Websocket
