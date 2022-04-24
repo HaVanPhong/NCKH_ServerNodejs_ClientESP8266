@@ -8,7 +8,7 @@
     console.log(message);
     // p.append(message+"==||==")
     console.log(message);
-    if (message === "1") {
+    if (message == "1") {
       p.innerHTML = "Đèn đã bật";
     } else {
       p.innerHTML = "Đèn đã tắt";
