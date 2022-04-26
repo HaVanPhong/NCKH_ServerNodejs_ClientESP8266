@@ -47,7 +47,7 @@ app.get("/ok", (req, res) => {
 
 connecDB();
 router(app);
-
-server.listen(configuration.PORT, () => {
-  console.log("server is running at port: "+ configuration.PORT);
+require("dotenv").config();
+server.listen(process.env.PORT, () => {
+  console.log("server is running at port: "+ process.env.PORT);
 });
