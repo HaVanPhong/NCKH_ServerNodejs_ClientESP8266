@@ -12,7 +12,7 @@ const WebSocket = require("ws");
 const { WebSocketServer } = require("ws");
 const server = http.createServer(app);
 
-const wss = new WebSocketServer({ port: 8080 });
+const wss = new WebSocketServer({ port: process.env.PORT||8080 });
 
 const EquipmentModel= require("./models/equipment.model");
 
@@ -48,6 +48,6 @@ app.get("/ok", (req, res) => {
 connecDB();
 router(app);
 require("dotenv").config();
-server.listen(process.env.PORT, () => {
-  console.log("server is running at port: "+ process.env.PORT);
+server.listen(process.env.PORT||8082, () => {
+  console.log("server is running at port: "+ process.env.PORT||8082);
 });
