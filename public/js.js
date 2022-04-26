@@ -1,17 +1,17 @@
 (function () {
   let status = document.getElementById("status");
+  let idEquip= document.getElementById("idEquip");
   let sendBtn = document.getElementById("btnSubmit");
   let p = document.getElementById("p");
   let ws;
 
   function showMessage(message) {
-    console.log(message);
     // p.append(message+"==||==")
-    console.log(message);
-    if (message == "1") {
-      p.innerHTML = "Đèn đã bật";
+    console.log("status: "+message);
+    if (message==="1") {
+      p.innerText = "Đèn đã bật";
     } else {
-      p.innerHTML = "Đèn đã tắt";
+      p.innerText = "Đèn đã tắt";
     }
   }
 
@@ -21,11 +21,11 @@
       ws.close();
     }
 
-    ws = new WebSocket("ws://localhost:8080");
+    ws = new WebSocket("ws://192.168.0.103:8080");
     ws.onopen = () => {
       console.log("Connection opened!");
     };
-    ws.onmessage = ({ data }) => showMessage("onmessage: " + data);
+    ws.onmessage = ({ data }) => showMessage(data);
     ws.onclose = function () {
       ws = null;
     };
@@ -36,10 +36,14 @@
       showMessage("No WebSocket connection :(");
       return;
     }
+    let obj= {
+      _id: idEquip.value,
+      status: status.value
+    }
+    let json= JSON.stringify(obj);
+    ws.send(json);
 
-    ws.send(status.value);
-
-    showMessage("on submit: " + status.value);
+    showMessage(json);
     //   status.value="";
     return false;
   };

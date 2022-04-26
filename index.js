@@ -1,5 +1,12 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
+const cors= require("cors");
+const helmet= require("helmet");
+const router= require("./routers");
+const connecDB= require("./Database/database");
+const configuration= require("./configs/configuration");
+
 const http = require("http");
 const WebSocket = require("ws");
 const { WebSocketServer } = require("ws");
@@ -7,44 +14,40 @@ const server = http.createServer(app);
 
 const wss = new WebSocketServer({ port: 8080 });
 
+const EquipmentModel= require("./models/equipment.model");
+
+app.use(cors());
+app.use(express.json());
+app.use(helmet.xssFilter());
+app.use(helmet.hidePoweredBy());
 app.use(express.static("public"));
 app.set("views", "./views");
 app.set("view engine", "ejs");
 
 wss.on("connection", function connection(ws) {
+  console.log("co ng ket noi");
   ws.on("message", function message(data, isBinary) {
-    console.log("co ng ket noi");
+    console.log("Server nhận được: "+ data);
+    let equip= JSON.parse(data);
     wss.clients.forEach(function each(client) {
       if (client.readyState === WebSocket.OPEN) {
-        client.send(data, { binary: isBinary });
+        client.send(data);
+        (async()=>{
+          await EquipmentModel.findOneAndUpdate({_id: equip._id}, equip)
+        })();
       }
     });
   });
 });
 
-// var ws = new WebSocket.Server({
-//     server
-// });
-// ws.on('connection',  socket =>{
-//     console.log("co thang at o nao do ket noi");
-//     var m;
-//     socket.on('message', function(message) {
-//         console.log('received: %s', message);
-//         m= message.toString("utf-8");
-//         console.log("trong mess: ", m)
-//         socket.send(m)
-//     });
-
-//     setInterval(() => {
-//         socket.send("3 giay 1 lan")
-//     }, 3000);
-
-// });
 
 app.get("/ok", (req, res) => {
   res.render("index");
 });
 
-server.listen(8082, () => {
-  console.log("server is running");
+connecDB();
+router(app);
+
+server.listen(configuration.PORT, () => {
+  console.log("server is running at port: "+ configuration.PORT);
 });

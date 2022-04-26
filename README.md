@@ -1,12 +1,12 @@
-### Cài đặt server nodejs
+# Cài đặt server nodejs
 <p>🔭 Tải và cài đặt nodejs <a href="https://nodejs.org/en/">tại đây</a></p>
-<p>🔭 Dùng Visual studio code mở project. Chạy lệnh: </p>
+<p>🔭 Dùng Visual studio code mở project. Chạy các lệnh: </p>
 
-# npm install
-# npm run dev
+### npm install
+### npm run dev
 
 
-### Code Arduino trong thư mục ClientESP8266_Arduino
+# Code Arduino trong thư mục ClientESP8266_Arduino
 <p>🔭 Thay đổi tên wifi trong biến: const char* ssid</p>
 <p>🔭 Thay đổi mật khẩu wifi trong biến: const char* password</p>
 <p>🔭 Thay đổi host trong biến cost char* host theo địa chỉ IPv4 address</p>
