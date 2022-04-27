@@ -48,6 +48,6 @@ app.get("/ok", (req, res) => {
 connecDB();
 router(app);
 require("dotenv").config();
-server.listen(process.env.PORT||8082, () => {
+server.listen(process.env.PORT||8082, '0.0.0.0',() => {
   console.log("server is running at port: "+ process.env.PORT||8082);
 });
