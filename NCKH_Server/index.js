@@ -47,5 +47,5 @@ connecDB();
 router(app);
 
 app.listen(process.env.PORT || 8082, () => {
-  console.log("server is running at port: " + process.env.PORT || 8082);
+  console.log("server is running at port: " + (process.env.PORT || 8082));
 });

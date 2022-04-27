@@ -41,7 +41,7 @@
       status: status.value
     }
     let json= JSON.stringify(obj);
-    ws.send(json);
+    ws.send(status.value);
 
     showMessage(json);
     //   status.value="";
