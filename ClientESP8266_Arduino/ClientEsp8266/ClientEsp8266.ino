@@ -2,9 +2,16 @@
 #include <WebSocketsClient.h>           // Thư viện WebSocketsClient
 
 //cần thay đổi khi chạy
-const char* ssid = "không có tên";         // Tên của mạng WiFi mà bạn muốn kết nối đến
-const char* password = "lich123456";   // Mật khẩu của mạng WiFi
+//wifi thư viện tầng 2
+const char* ssid = "HaUI Student";         // Tên của mạng WiFi mà bạn muốn kết nối đến
+const char* password = "hellohello";   // Mật khẩu của mạng WiFi
 const char* host="192.168.43.253";
+//const char* host="201.0.189.124";
+
+//wifi nhà Phòng
+//const char* ssid = "không có tên";
+//const char* password = "lich123456"; 
+//const char* host="192.168.43.253";
 ///==================================
 const int port=8080;
 const int led = 14;                      // Đèn led ở chân GPIO2
