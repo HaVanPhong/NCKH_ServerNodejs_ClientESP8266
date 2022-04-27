@@ -19,7 +19,7 @@ const EquipmentModel= require("./models/equipment.model");
 app.use(cors());
 app.use(express.json());
 app.use(helmet.xssFilter());
-app.use(helmet.hidePoweredBy());
+
 app.use(express.static("public"));
 app.set("views", "./views");
 app.set("view engine", "ejs");
