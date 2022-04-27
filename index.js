@@ -48,6 +48,6 @@ app.get("/ok", (req, res) => {
 connecDB();
 router(app);
 
-server.listen(process.env.PORT || 8082,() => {
+app.listen(process.env.PORT || 8082,() => {
   console.log("server is running at port: "+ process.env.PORT||8082);
 });
