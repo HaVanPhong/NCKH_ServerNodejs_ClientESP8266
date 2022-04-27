@@ -21,7 +21,7 @@
       ws.close();
     }
 
-    ws = new WebSocket("ws://192.168.0.103:8080");
+    ws = new WebSocket("ws://https://nckh-api-server.herokuapp.com");
     ws.onopen = () => {
       console.log("Connection opened!");
     };
