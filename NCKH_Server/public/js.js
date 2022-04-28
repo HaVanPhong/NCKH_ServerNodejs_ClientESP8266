@@ -2,6 +2,7 @@
   let status = document.getElementById("status");
   let idEquip= document.getElementById("idEquip");
   let sendBtn = document.getElementById("btnSubmit");
+  let led= document.getElementById("led");
   let p = document.getElementById("p");
   let ws;
 
@@ -36,12 +37,9 @@
       showMessage("No WebSocket connection :(");
       return;
     }
-    let obj= {
-      _id: idEquip.value,
-      status: status.value
-    }
-    let json= JSON.stringify(obj);
-    ws.send(status.value);
+    let obj= ""+idEquip.value+";"+led.value+";"+status.value;
+    // let json= JSON.stringify(obj);
+    ws.send(obj);
 
     showMessage(json);
     //   status.value="";

@@ -5,13 +5,18 @@ const equipmentSchema= mongoose.Schema({
     type: String,
     required: true
   },
+  led: {
+    type: Number,
+    default: 14
+  },
   status: {
-    type: String,
-    default: "0"
+    type: Number,
+    default: 0
   }
   ,
   img: {
-    type: String
+    type: String,
+    default: "https://res.cloudinary.com/djowq0mq4/image/upload/v1651150019/e_ywc7le.jpg"
   }
   ,
   location: {
