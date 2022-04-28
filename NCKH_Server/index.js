@@ -5,13 +5,12 @@ const helmet = require("helmet");
 const router = require("./routers");
 const connecDB = require("./Database/database");
 const configuration = require("./configs/configuration");
-
-const http = require("http");
+ 
 const WebSocket = require("ws");
 const { WebSocketServer } = require("ws");
-const server = http.createServer(app);
 
 const wss = new WebSocketServer({ port:8080 });
+
 
 const EquipmentModel = require("./models/equipment.model");
 
@@ -25,17 +24,25 @@ app.set("view engine", "ejs");
 
 wss.on("connection", function connection(ws) {
   console.log("co ng ket noi");
-  ws.on("message", function message(data, isBinary) {
+  ws.on("message", function message(data) {
     console.log("Server nhận được: " + data);
-    let equip = JSON.parse(data);
-    wss.clients.forEach(function each(client) {
+    try {
+      wss.clients.forEach(function each(client) {
       if (client.readyState === WebSocket.OPEN) {
-        client.send(data);
+        client.send(data.toString());
+        let str= data.toString().split(";");
+        let idEquip= str[0];
+        let led= str[1];
+        let status= str[2];
+        if (idEquip.length>=10 && (status==="1"||status==="0") )
         (async () => {
-          await EquipmentModel.findOneAndUpdate({ _id: equip._id }, equip);
+          await EquipmentModel.findOneAndUpdate({ _id: idEquip }, {status: Number(status)});
         })();
       }
     });
+    } catch (error) {
+      console.log("err: "+ error.message)
+    }
   });
 });
 
@@ -49,3 +56,5 @@ router(app);
 app.listen(process.env.PORT || 8082, () => {
   console.log("server is running at port: " + (process.env.PORT || 8082));
 });
+
+ 
