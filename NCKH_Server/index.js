@@ -29,11 +29,15 @@ wss.on("connection", function connection(ws) {
     try {
       wss.clients.forEach(function each(client) {
       if (client.readyState === WebSocket.OPEN) {
-        client.send(data.toString());
         let str= data.toString().split(";");
         let idEquip= str[0];
         let led= str[1];
         let status= str[2];
+        if (led?.length<2){
+          led="0"+led;
+        }
+        data= idEquip+";"+led+";"+status;
+        client.send(data);
         if (idEquip.length>=10 && (status==="1"||status==="0") )
         (async () => {
           await EquipmentModel.findOneAndUpdate({ _id: idEquip }, {status: Number(status)});

@@ -71,15 +71,13 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
     case WStype_TEXT:                                 // Sự kiện khi nhận được thông điệp dạng TEXT
       Serial.printf("[WSc] res text\n");
       Serial.printf("[WSc] get text: %s\n", payload);
-      if ( strcmp((const char*)payload,"1") == 0){
-        digitalWrite(led, HIGH);
-      }else {
-        digitalWrite(led, LOW); 
+
+      if ( (int)payload[28]-48 == 1){
+        digitalWrite(((int)payload[25]-48)*10+((int)payload[26]-48), HIGH);
+      } else if((int)payload[28]-48 == 0) {
+        digitalWrite(((int)payload[25]-48)*10+((int)payload[26]-48), LOW); 
       }
-//      while(1){
-//        webSocket.sendTXT("Hi Server!");               // Gởi thông điệp đến server
-//        delay(5000);
-//      }
+
       break;
     default: 
       Serial.printf("[WSc] get text default: %s\n", payload);
