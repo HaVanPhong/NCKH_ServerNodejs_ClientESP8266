@@ -33,10 +33,11 @@ wss.on("connection", function connection(ws) {
         let idEquip= str[0];
         let led= str[1];
         let status= str[2];
+        let idArea= str[3];
         if (led?.length<2){
           led="0"+led;
         }
-        data= idEquip+";"+led+";"+status;
+        data= idArea+";"+led+";"+status;
         client.send(data);
         if (idEquip.length>=10 && (status==="1"||status==="0") )
         (async () => {

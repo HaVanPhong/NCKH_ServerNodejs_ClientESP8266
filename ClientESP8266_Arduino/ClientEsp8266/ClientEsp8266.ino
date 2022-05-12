@@ -1,19 +1,22 @@
 #include <ESP8266WiFi.h>                // Thư viện dùng để kết nối WiFi của ESP8266
 #include <WebSocketsClient.h>           // Thư viện WebSocketsClient
 
+
 //cần thay đổi khi chạy
 //wifi thư viện tầng 2
-//const char* ssid = "HaUI FREE";         // Tên của mạng WiFi mà bạn muốn kết nối đến
-//const char* password = "";   // Mật khẩu của mạng WiFi
-//const char* host="201.0.189.124";
+const char* ssid = "HaUI Library";         // Tên của mạng WiFi mà bạn muốn kết nối đến
+const char* password = "";   // Mật khẩu của mạng WiFi
+const char* host="204.0.194.195";
 
 //wifi nhà Phòng
-const char* ssid = "không có tên";
-const char* password = "lich123456"; 
-const char* host="192.168.0.103";
+//const char* ssid = "không có tên";
+//const char* password = "lich123456"; 
+//const char* host="192.168.0.103";
 ///==================================
 const int port=8080;
 const int led = 14;                      // Đèn led ở chân GPIO2
+const char* ID_AREA="626f391e052757f666bca23c"; //id của khu vực. mỗi khu vực là 1 cái arduino
+int c;
 WebSocketsClient webSocket;
 void setup() {
   Serial.begin(9600);                 // Khởi tạo kết nối Serial để truyền dữ liệu đến máy tính
@@ -70,14 +73,30 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
       break;
     case WStype_TEXT:                                 // Sự kiện khi nhận được thông điệp dạng TEXT
       Serial.printf("[WSc] res text\n");
-      Serial.printf("[WSc] get text: %s\n", payload);
+      Serial.printf("[WSc] get text: %s\n", payload); //idArea;led;status
 
-      if ( (int)payload[28]-48 == 1){
-        digitalWrite(((int)payload[25]-48)*10+((int)payload[26]-48), HIGH);
-      } else if((int)payload[28]-48 == 0) {
-        digitalWrite(((int)payload[25]-48)*10+((int)payload[26]-48), LOW); 
+      c=1;
+      for (int i=0; i<strlen(ID_AREA); i++){
+        if (ID_AREA[i]!=(char)payload[i]){
+           c=c+1; 
+           break;
+        }
       }
-
+     
+      if (c==1){
+          if ((int)payload[28]-48 == 1){ //id;led;status
+              digitalWrite(((int)payload[25]-48)*10+((int)payload[26]-48), HIGH);
+              Serial.printf("Đã bật chân: %d", ((int)payload[25]-48)*10+((int)payload[26]-48));
+          } else if((int)payload[28]-48 == 0) {
+              digitalWrite(((int)payload[25]-48)*10+((int)payload[26]-48), LOW); 
+              Serial.printf("Đã tắt chân: %d", ((int)payload[25]-48)*10+((int)payload[26]-48));
+          }
+      }else {
+            Serial.printf("Adruino chỉ thực hiện cho khu vực 626f391e052757f666bca23c");
+            Serial.printf("C: %d", c);
+            
+      }
+      
       break;
     default: 
       Serial.printf("[WSc] get text default: %s\n", payload);
