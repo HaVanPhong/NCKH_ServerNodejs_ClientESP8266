@@ -297,6 +297,19 @@
 					"name": "Equipment Controller",
 					"item": [
 						{
+							"name": "History",
+							"item": [
+								{
+									"name": "get all history",
+									"request": {
+										"method": "GET",
+										"header": []
+									},
+									"response": []
+								}
+							]
+						},
+						{
 							"name": "get all equipment of area",
 							"request": {
 								"auth": {
@@ -329,18 +342,37 @@
 						{
 							"name": "Create an quipment",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmMzRiMzc4NWIzYmRjMTJhMDA0MzQiLCJ1c2VybmFtZSI6ImhhcGhvbmc2Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE2NTE3MTYwOTEsImV4cCI6MTY1MTgwMjQ5MX0.1RRDtbsMN1Crl2fvhKPV4GEbfkA3u1LjF1FSkEiYF0Y",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Máy Lạnh\",\r\n    \"location\": \"Xưởng gỗ\",\r\n    \"led\": 12\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
-									"raw": "localhost:8082/api/equipment/",
+									"raw": "localhost:8082/api/equipments/626f391e052757f666bca23c",
 									"host": [
 										"localhost"
 									],
 									"port": "8082",
 									"path": [
 										"api",
-										"equipment",
-										""
+										"equipments",
+										"626f391e052757f666bca23c"
 									]
 								}
 							},
