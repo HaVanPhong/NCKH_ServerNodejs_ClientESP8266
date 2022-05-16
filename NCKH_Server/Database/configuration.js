@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 module.exports = {
-  MONGODB_URI: process.env.MONGODB_URI || "mongodb+srv://root:phong123@cluster0.sd0po.mongodb.net/NCKH_Server2?retryWrites=true&w=majority",
+  MONGODB_URI: process.env.MONGODB_URI || "mongodb://localhost:27017/nckh",
   USER_ADMIN: {
     username: "admin",
     password: "admin",
@@ -9,5 +9,5 @@ module.exports = {
     address: "Hà Nội",
     dob: "13/01/2001",
     role: "admin",
-  }
+  },
 };
