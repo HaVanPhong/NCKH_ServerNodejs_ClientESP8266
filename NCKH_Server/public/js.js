@@ -38,10 +38,11 @@
       return;
     }
     let obj= ""+idEquip.value+";"+led.value+";"+status.value;
+    // console.log("status: "+status.value);
     // let json= JSON.stringify(obj);
     ws.send(obj);
 
-    showMessage(json);
+    showMessage(obj);
     //   status.value="";
     return false;
   };

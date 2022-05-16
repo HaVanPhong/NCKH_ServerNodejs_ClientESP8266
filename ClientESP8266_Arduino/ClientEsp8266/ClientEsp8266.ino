@@ -1,33 +1,70 @@
 #include <ESP8266WiFi.h>                // Thư viện dùng để kết nối WiFi của ESP8266
 #include <WebSocketsClient.h>           // Thư viện WebSocketsClient
-
+#include <Wire.h>
+#include "rgb_lcd.h"
 
 //cần thay đổi khi chạy
-//wifi thư viện tầng 2
-const char* ssid = "HaUI Library";         // Tên của mạng WiFi mà bạn muốn kết nối đến
-const char* password = "";   // Mật khẩu của mạng WiFi
-const char* host="204.0.194.195";
+//wifi  
+//const char* ssid = "Bintech";         // Tên của mạng WiFi mà bạn muốn kết nối đến
+//const char* password = "Dongcoremthongminh";   // Mật khẩu của mạng WiFi
+//const char* host="192.168.0.110";
 
 //wifi nhà Phòng
-//const char* ssid = "không có tên";
-//const char* password = "lich123456"; 
-//const char* host="192.168.0.103";
+const char* ssid = "không có tên";
+const char* password = "lich123456"; 
+const char* host="192.168.0.103";
 ///==================================
 const int port=8080;
-const int led = 14;                      // Đèn led ở chân GPIO2
+const int led1 = 0;
+const int led2 = 2;
+//const int led3 = 4;
+//const int led4 = 5;
+const int led5 = 12;
+const int led6 = 14;
+const int led7 = 16;                      // Đèn led ở chân GPIO2
 const char* ID_AREA="626f391e052757f666bca23c"; //id của khu vực. mỗi khu vực là 1 cái arduino
 int c;
 WebSocketsClient webSocket;
+
+//lcd
+rgb_lcd lcd;
+
+const int colorR = 0;
+const int colorG = 0;
+const int colorB = 255;
+
 void setup() {
+  lcd.begin(16, 2);
+
+  lcd.setRGB(colorR, colorG, colorB);
+
+  // Print a message to the LCD.
+  lcd.print("NCKH: IoT ...");
+  lcd.setCursor(0, 1);
+  lcd.print("Already...");
+
+  
   Serial.begin(9600);                 // Khởi tạo kết nối Serial để truyền dữ liệu đến máy tính
-  pinMode(led, OUTPUT);
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+//  pinMode(led3, OUTPUT);
+//  pinMode(led4, OUTPUT);
+  pinMode(led5, OUTPUT);
+  pinMode(led6, OUTPUT);
+  pinMode(led7, OUTPUT);
+
+  
+//  
   startWiFi();
   webSocket.begin(host, port, "/"); 
   
 }
 void loop() {
+//  lcd.setCursor(0, 1);
+//  lcd.print("on loop oke...");
   webSocket.loop();
   connectWebSocket();
+  
 }
 void startWiFi() {
   WiFi.begin(ssid, password);           // Kết nối vào mạng WiFi
@@ -87,9 +124,21 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
           if ((int)payload[28]-48 == 1){ //id;led;status
               digitalWrite(((int)payload[25]-48)*10+((int)payload[26]-48), HIGH);
               Serial.printf("Đã bật chân: %d", ((int)payload[25]-48)*10+((int)payload[26]-48));
+              lcd.setCursor(0, 1);
+              lcd.print("              ");
+              lcd.setCursor(0, 1);
+              lcd.print("Led on: ");
+              lcd.setCursor(8, 1);
+              lcd.print(((int)payload[25]-48)*10+((int)payload[26]-48));
           } else if((int)payload[28]-48 == 0) {
               digitalWrite(((int)payload[25]-48)*10+((int)payload[26]-48), LOW); 
               Serial.printf("Đã tắt chân: %d", ((int)payload[25]-48)*10+((int)payload[26]-48));
+              lcd.setCursor(0, 1);
+              lcd.print("              ");
+              lcd.setCursor(0, 1);
+              lcd.print("Led off: ");
+              lcd.setCursor(9, 1);
+              lcd.print(((int)payload[25]-48)*10+((int)payload[26]-48));
           }
       }else {
             Serial.printf("Adruino chỉ thực hiện cho khu vực 626f391e052757f666bca23c");

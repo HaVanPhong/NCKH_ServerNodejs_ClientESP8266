@@ -1,0 +1,382 @@
+{
+	"info": {
+		"_postman_id": "42f48e10-a43d-4add-ad84-53d98c8dba8c",
+		"name": "NCKH",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ADMIN",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Login Copy for admin",
+							"request": {
+								"method": "POST",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User Controller",
+					"item": [
+						{
+							"name": "get all user",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "update user",
+							"request": {
+								"method": "PATCH",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "get user by id",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "Delete user",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8082/api/users",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Area Controller",
+					"item": [
+						{
+							"name": "get all area (only admin can do it)",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "Get area by id",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Equiment Controller",
+					"item": [
+						{
+							"name": "get all equipment",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "signUp",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"haphong\",\r\n    \"password\": \"phong123\",\r\n    \"phone\": \"0982222345\",\r\n    \"address\": \"Hà Nội\",\r\n    \"dob\": \"13/01/2001\",\r\n    \"role\": \"admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/api/auth/signup",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "test",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"haphong6\",\r\n    \"password\": \"phong123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/api/auth/login",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Area Controller",
+					"item": [
+						{
+							"name": "Create ares",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmMzRiMzc4NWIzYmRjMTJhMDA0MzQiLCJ1c2VybmFtZSI6ImhhcGhvbmc2Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE2NTE3MTYwOTEsImV4cCI6MTY1MTgwMjQ5MX0.1RRDtbsMN1Crl2fvhKPV4GEbfkA3u1LjF1FSkEiYF0Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Trường học\",\r\n    \"address\": \"gần nhà\",\r\n    \"area\": 300\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/api/areas",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"areas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all area of user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmMzRiMzc4NWIzYmRjMTJhMDA0MzQiLCJ1c2VybmFtZSI6ImhhcGhvbmc2Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE2NTE3MTYwOTEsImV4cCI6MTY1MTgwMjQ5MX0.1RRDtbsMN1Crl2fvhKPV4GEbfkA3u1LjF1FSkEiYF0Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8082/api/areas",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"areas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get area by id (only area of user has been auth)",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "update area",
+							"request": {
+								"method": "PATCH",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "Delete area",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjY1MGRlZTg0ZmEzZWU3NzY2Yjc2MDYiLCJ1c2VybmFtZSI6ImhhcGhvbmciLCJyb2xlIjoidXNlciIsImlhdCI6MTY1MDg1NzYxNywiZXhwIjoxNjUwOTQ0MDE3fQ.LjmiPGpVbW2TVnXb7ggVwQhzHCH3mQOmV6m0sEtvFXQ",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost:8082/api/areas/62658a77583d24442ddf26df",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"areas",
+										"62658a77583d24442ddf26df"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Equipment Controller",
+					"item": [
+						{
+							"name": "get all equipment of area",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjZmMzRiMzc4NWIzYmRjMTJhMDA0MzQiLCJ1c2VybmFtZSI6ImhhcGhvbmc2Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE2NTE3MTYwOTEsImV4cCI6MTY1MTgwMjQ5MX0.1RRDtbsMN1Crl2fvhKPV4GEbfkA3u1LjF1FSkEiYF0Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8082/api/equipments/627329bccb71ee2af0dd37b0",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"equipments",
+										"627329bccb71ee2af0dd37b0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create an quipment",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "localhost:8082/api/equipment/",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"equipment",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete equiment of area",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8082/api/equipments/",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"api",
+										"equipments",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update equipment of area",
+							"request": {
+								"method": "PATCH",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
