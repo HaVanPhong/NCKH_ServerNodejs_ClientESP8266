@@ -15,8 +15,14 @@ module.exports={
   },
   getAllHistoryOfEquipment: async(req, res)=>{
     try {
+      let perPage= 30;
+      let page= req.params.page || 1;
       let idEquip= req.params.id;
-      let his= await HistoryModel.find({equipment: idEquip}).populate("equipment");
+      let his= await HistoryModel.find({equipment: idEquip})
+        .populate("equipment")
+        .skip((perPage*page)-perPage)
+        .limit(perPage)
+        .exec();
       if (his.length==0){
         return res.status(404).json(new errorResponse(404, "Notfound any history"));
       } else {

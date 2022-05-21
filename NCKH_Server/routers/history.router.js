@@ -16,7 +16,7 @@ router
   );
 
 router
-  .route("/:id")  
+  .route("/:id/:page")  
   .get(
     asyncMiddleware(authMidleware), 
     asyncMiddleware(getAllHistoryOfEquipment)

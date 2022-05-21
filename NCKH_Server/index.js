@@ -41,20 +41,27 @@ wss.on("connection", function connection(ws) {
           client.send(data);
           if (idEquip.length >= 10 && (status === "1" || status === "0"))
             (async () => {
+              let equip = await EquipmentModel.findById(idEquip);
+              let equipUpdate={
+                status: Number(status),
+              };
+              if (status==="0" && equip.status===1){
+                let t_on= equip.time_on + (Math.round(new Date().getTime()- new Date(equip.updatedAt).getTime())/(1000*60*60)).toFixed(2);
+                equipUpdate.time_on= t_on;
+              }
               await EquipmentModel.findOneAndUpdate(
                 { _id: idEquip },
-                { status: Number(status) }
+                equipUpdate
               );
-              let equip = await EquipmentModel.findById(idEquip);
+              
               
               let his = {
                 status: status,
                 equipment: equip._id,
               };
-              console.log("his: ", his);
               await HistoryModel.create(his);
             })();
-        }Z
+        }
       });
     } catch (error) {
       console.log("err: " + error.message);

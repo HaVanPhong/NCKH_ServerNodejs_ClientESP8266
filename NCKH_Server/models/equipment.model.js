@@ -12,15 +12,17 @@ const equipmentSchema= mongoose.Schema({
   status: {
     type: Number,
     default: 0
-  }
-  ,
+  },
   img: {
     type: String,
     default: "https://res.cloudinary.com/djowq0mq4/image/upload/v1651150019/e_ywc7le.jpg"
-  }
-  ,
+  },
   location: {
     type: String
+  },
+  time_on:{
+    type: Number,
+    default: 0
   },
   area: {
     type: mongoose.SchemaTypes.ObjectId,
