@@ -76,6 +76,12 @@ module.exports= {
       if (!areaUpdate_n_equipment){
         return res.status(403).json(new errorResponse(403, "Không thể update số lượng thiết bị của khu vực"))
       }
+
+      let isExistsLed= await EquipmentModel.findOne({led: value.led, area: idArea});
+      if (isExistsLed){
+        return res.status(403).json(new errorResponse(403, "Chân led "+ value.led+ " đã được sử dụng"));
+      }
+
       value.area= areaUpdate_n_equipment._id;
 
       let equipment= await EquipmentModel.create(value);
