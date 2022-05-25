@@ -22,6 +22,7 @@ module.exports={
         .populate("equipment")
         .skip((perPage*page)-perPage)
         .limit(perPage)
+        .sort('-createdAt')
         .exec();
       if (his.length==0){
         return res.status(404).json(new errorResponse(404, "Notfound any history"));

@@ -45,9 +45,15 @@ wss.on("connection", function connection(ws) {
               let equipUpdate={
                 status: Number(status),
               };
-              if (status==="0" && equip.status===1){
-                let t_on= equip.time_on + (Math.round(new Date().getTime()- new Date(equip.updatedAt).getTime())/(1000*60*60)).toFixed(2);
-                equipUpdate.time_on= t_on;
+              if (status==="0" && equip?.status===1){
+                try {
+                  let addTime= (Math.round(new Date().getTime()- new Date(equip.updatedAt).getTime())/(1000*60*60)).toFixed(2);
+                  let t_on= Number(equip.time_on) + Number(addTime);
+                  console.log(t_on);
+                  equipUpdate.time_on= t_on;
+                } catch (error) {
+                  console.log("err");
+                }
               }
               await EquipmentModel.findOneAndUpdate(
                 { _id: idEquip },
