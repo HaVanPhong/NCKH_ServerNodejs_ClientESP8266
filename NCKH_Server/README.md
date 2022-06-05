@@ -1,5 +1,5 @@
 
-# Các bạn clone về, Sau đó dùng git flow checkout ra nhánh của riêng mình, rồi mới code. Các lệnh git như sau:
+# Quy trình git flow:
 - git clone + link project
 - git checkout -b + tên nhánh. Ví dụ: git checkout phong để tạo ra nhánh riêng của Phòng, (lần đầu tạo nhánh thì có -b, từ các lần sau chuyển nhánh thì k cần -b, chỉ cần git checkout)
 - sau khi git checkout, 1 bản copy được tạo từ project gốc, các bạn có thể tuỳ ý sửa code, sau khi hoàn thiện code, bàn bạc lại với mọi người rồi mới merge code
